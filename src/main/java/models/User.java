@@ -2,6 +2,7 @@ package models;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString(exclude = {"passport"})
+@NoArgsConstructor
 public class User implements Serializable {
 
     @Id
@@ -22,7 +24,7 @@ public class User implements Serializable {
     private int id;
     @Column(name = "username")
     private String name;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @PrimaryKeyJoinColumn
     @JoinColumn(name = "passport_id")
     private Passport passport;
@@ -33,8 +35,7 @@ public class User implements Serializable {
     @ElementCollection
     private List<String> skills = new ArrayList<>();
 
-    public User() {
-    }
+
 
     public User(String name) {
         this.name = name;
