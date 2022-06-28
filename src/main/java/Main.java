@@ -8,7 +8,6 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,11 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-        Metadata metadata = new MetadataSources(serviceRegistry)
-                .addAnnotatedClass(User.class)
-                .addAnnotatedClass(Passport.class)
-                .addAnnotatedClass(Card.class)
-                .getMetadataBuilder().build();
+        Metadata metadata = new MetadataSources(serviceRegistry).addAnnotatedClass(User.class).addAnnotatedClass(Passport.class).addAnnotatedClass(Card.class).getMetadataBuilder().build();
         SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
         Session session = sessionFactory.openSession();
 
@@ -33,6 +28,20 @@ public class Main {
 
 
         session.getTransaction().commit();
+        //todo wtf in sd jpa
+//        List<Passport> passports = session.createQuery("select p from Passport p", Passport.class).getResultList();
+//        passports.forEach(passport -> System.out.println(passport));
+//        passports.forEach(passport -> System.out.println(passport.getUser()));
+
+//        List<User> users = session.createQuery("select u from  User u", User.class).getResultList();
+//        users.forEach(user -> System.out.println(user));
+//        users.forEach(user -> System.out.println(user.getCards()));
+
+//        List<Card> cards = session.createQuery("select c from Card c join fetch c.user u ", Card.class).getResultList();
+//        cards.forEach(card -> System.out.println(card));
+//        cards.forEach(card -> System.out.println(card.getUser()));
+
+        session.createQuery("select c.user from Card c",User.class).getResultList().forEach(user -> System.out.println(user));
 
         session.close();
         sessionFactory.close();

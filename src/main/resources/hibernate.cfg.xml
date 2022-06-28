@@ -12,7 +12,12 @@
         </property>
         <property name="connection.username">root</property>
         <property name="connection.password">rootroot</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="show_sql">true</property>
     </session-factory>
 </hibernate-configuration>
+
+<!--SET PASSWORD FOR 'root'@'localhost' = PASSWORD('newpass');-->
+<!--FLUSH PRIVILEGES-->
+
+
