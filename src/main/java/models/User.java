@@ -32,6 +32,14 @@ public class User implements Serializable {
     )
     private List<Card> cards;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_sg",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "sg_id")
+    )
+    private List<Sunglass> sunglasses;
+
     public User(String name) {
         this.name = name;
     }
@@ -39,5 +47,10 @@ public class User implements Serializable {
     public User(String name, Passport passport) {
         this.name = name;
         this.passport = passport;
+    }
+
+    public User(String name, List<Sunglass> sunglasses) {
+        this.name = name;
+        this.sunglasses = sunglasses;
     }
 }

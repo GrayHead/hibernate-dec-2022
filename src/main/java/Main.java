@@ -1,5 +1,6 @@
 import models.Card;
 import models.Passport;
+import models.Sunglass;
 import models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +17,12 @@ public class Main {
     public static void main(String[] args) {
 
         StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-        Metadata metadata = new MetadataSources(serviceRegistry).addAnnotatedClass(User.class).addAnnotatedClass(Passport.class).addAnnotatedClass(Card.class).getMetadataBuilder().build();
+        Metadata metadata = new MetadataSources(serviceRegistry)
+                .addAnnotatedClass(User.class)
+                .addAnnotatedClass(Passport.class)
+                .addAnnotatedClass(Card.class)
+                .addAnnotatedClass(Sunglass.class)
+                .getMetadataBuilder().build();
         SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
         Session session = sessionFactory.openSession();
 
@@ -27,15 +33,21 @@ public class Main {
 //        session.save(new User("olya", new Passport("fdpnidh"), Arrays.asList(new Card(3214321432143214L), new Card(3324123412341234L))));
 //        session.save(new User("kolya", new Passport("asu745w736"), Arrays.asList(new Card(4214321432143214L), new Card(4324123412341234L))));
 
-        User user = new User("vasya");
-        System.out.println(user);
-        Card card1 = new Card(12312312313L, user);
-        System.out.println(user);
-        Card card2 = new Card(3245345, user);
-        System.out.println(user);
-        session.save(card1);
-        session.save(card2);
-        System.out.println(user);
+//        User user = new User("vasya");
+//        System.out.println(user);
+//        Card card1 = new Card(12312312313L, user);
+//        System.out.println(user);
+//        Card card2 = new Card(3245345, user);
+//        System.out.println(user);
+//        session.save(card1);
+//        session.save(card2);
+//        System.out.println(user);
+
+        List<Sunglass> sunglasses = Arrays.asList(new Sunglass("okoban"), new Sunglass("raynab"));
+        User user1 = new User("vasya", sunglasses);
+        User user2 = new User("anna", sunglasses);
+        session.save(user1);
+        session.save(user2);
 
 
         session.getTransaction().commit();
