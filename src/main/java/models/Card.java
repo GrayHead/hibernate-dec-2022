@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -21,7 +18,15 @@ public class Card {
     private int id;
     private long number;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
+
     public Card(long number) {
         this.number = number;
+    }
+
+    public Card(long number, User user) {
+        this.number = number;
+        this.user = user;
     }
 }
