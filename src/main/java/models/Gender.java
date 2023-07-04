@@ -1,2 +1,5 @@
-package models;public enum Gender {
+package models;
+
+public enum Gender {
+    MALE, FEMALE,
 }
