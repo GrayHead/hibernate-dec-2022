@@ -18,7 +18,7 @@ public class User {
     @JoinColumn(name = "passport_id", referencedColumnName = "id")
     private Passport passport;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_card",
             joinColumns =
