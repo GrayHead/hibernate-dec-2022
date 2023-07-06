@@ -33,7 +33,12 @@ public class Main {
 
 //        List<User> selectUFromUserU = session.createQuery("select u from User u", User.class).getResultList();
         User user = session.find(User.class, 1);
+        Passport passport = session.find(Passport.class, 1);
         System.out.println(user);
+        System.out.println(passport);
+
+        System.out.println(session.createQuery("select p.user from Passport p", User.class).getResultList());
+
 
         session.close();
         sessionFactory.close();
