@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,6 +17,17 @@ public class User {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "passport_id", referencedColumnName = "id")
     private Passport passport;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_card",
+            joinColumns =
+            @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "card_id"
+            )
+    )
+
+    private List<Card> cards;
 
     public User(String name, Passport passport) {
         this.name = name;
