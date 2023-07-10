@@ -15,6 +15,11 @@ public class Card {
     private String number;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_card",
+            inverseJoinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "card_id")
+    )
     private User user;
 
 

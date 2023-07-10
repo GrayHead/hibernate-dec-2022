@@ -29,6 +29,14 @@ public class User {
     @JoinColumn(name = "passport_id", referencedColumnName = "id")
     private Passport passport;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_card",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "card_id")
+    )
+    private List<Card> cards = new ArrayList<>();
+
     public User(String name, String email, List<String> skills, Gender gender) {
         this.name = name;
         this.email = email;
