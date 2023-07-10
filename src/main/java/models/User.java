@@ -25,8 +25,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name =  "passport_id",referencedColumnName = "id")
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "passport_id", referencedColumnName = "id")
     private Passport passport;
 
     public User(String name, String email, List<String> skills, Gender gender) {
@@ -43,4 +43,6 @@ public class User {
         this.gender = gender;
         this.passport = passport;
     }
+
+
 }
