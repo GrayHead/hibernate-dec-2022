@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,21 +15,21 @@ public class Card {
     private int id;
     private String number;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_card",
             inverseJoinColumns = @JoinColumn(name = "user_id"),
             joinColumns = @JoinColumn(name = "card_id")
     )
-    private User user;
+    private List<User> users;
 
 
     public Card(String number) {
         this.number = number;
     }
 
-    public Card(String number, User user) {
+    public Card(String number, List<User> users) {
         this.number = number;
-        this.user = user;
+        this.users = users;
     }
 }

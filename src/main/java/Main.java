@@ -54,11 +54,11 @@ public class Main {
 
         /*create card with user*/
 
-        Card card = new Card("12345 67834 565 467", new User("vasya",
+        Card card = new Card("12345 67834 565 467", Arrays.asList(new User("vasya",
                 "kokos@kokos.com",
                 Arrays.asList("ang", "js"),
                 Gender.FEMALE,
-                new Passport("817538618213")));
+                new Passport("817538618213"))));
 
         session.save(card);
 
