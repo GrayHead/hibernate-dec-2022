@@ -1,3 +1,4 @@
+import models.Card;
 import models.Gender;
 import models.Passport;
 import models.User;
@@ -20,6 +21,7 @@ public class Main {
         Metadata metadata = new MetadataSources(serviceRegistry)
                 .addAnnotatedClass(User.class)
                 .addAnnotatedClass(Passport.class)
+                .addAnnotatedClass(Card.class)
                 .getMetadataBuilder()
                 .build();
 
@@ -49,6 +51,17 @@ public class Main {
 
         session.getTransaction().begin();
         session.delete(user1);
+
+        /*create card with user*/
+
+        Card card = new Card("12345 67834 565 467", new User("vasya",
+                "kokos@kokos.com",
+                Arrays.asList("ang", "js"),
+                Gender.FEMALE,
+                new Passport("817538618213")));
+
+        session.save(card);
+
 
         session.getTransaction().commit();
         session.close();
